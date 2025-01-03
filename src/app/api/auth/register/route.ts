@@ -4,6 +4,7 @@ import userModel from "@/lib/models/user.model";
 import { JWT_SECRET } from "@/lib/utils/constant";
 import { catchResponse, createJwtToken, encryptPassword, errorResponse, parseBody, successResponse } from "@/lib/utils/index.utils";
 import Joi from "joi";
+import { v4 } from "uuid";
 
 const registerSchema = Joi.object<{ email: string, password: string }>({
 	email: Joi.string().trim().lowercase().email().required(),
@@ -32,7 +33,7 @@ export const POST = apiHandler(async (req: Request) => {
 			password: hashedPassword
 		})
 		const user = await userData.save()
-		const token = createJwtToken({ user_id: user._id }, JWT_SECRET)
+		const token = createJwtToken({ user_id: user._id, uuid: v4() }, JWT_SECRET)
 
 		// Save token to database
 		const accessToken = new accessTokenModel({

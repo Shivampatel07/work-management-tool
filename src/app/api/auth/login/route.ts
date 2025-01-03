@@ -4,6 +4,7 @@ import userModel from "@/lib/models/user.model";
 import { JWT_SECRET } from "@/lib/utils/constant";
 import { catchResponse, comparePassword, createJwtToken, errorResponse, parseBody, successResponse } from "@/lib/utils/index.utils";
 import Joi from "joi";
+import { v4 } from "uuid";
 
 const loginSchema = Joi.object<{ email: string, password: string }>({
 	email: Joi.string().trim().lowercase().email().required(),
@@ -31,7 +32,7 @@ export const POST = apiHandler(async (req: Request) => {
 			return errorResponse("Invalid password", 400);
 		}
 
-		const token = createJwtToken({ user_id: user._id }, JWT_SECRET)
+		const token = createJwtToken({ user_id: user._id, uuid: v4() }, JWT_SECRET)
 
 		// Save token to database
 		const accessToken = new accessTokenModel({
