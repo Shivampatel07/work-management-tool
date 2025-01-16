@@ -44,7 +44,7 @@ export const parseBody = async (req: Request) => {
 		} else {
 			throw new Error("Unsupported content type");
 		}
-	} catch (error) {
+	} catch {
 		return {};
 	}
 }
