@@ -1,12 +1,12 @@
 'use client'
 
-import { useStore } from '@/store'
+import { rootStore } from '@/store'
 import { useEffect } from 'react'
 
-export function StoreProvider({ children }: { children: React.ReactNode }) {
+export function StoreProvider() {
   useEffect(() => {
-    useStore.persist.rehydrate()
+    rootStore.persist.rehydrate()
   }, [])
 
-  return children
+  return null;
 }
