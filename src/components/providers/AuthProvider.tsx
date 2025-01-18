@@ -14,7 +14,7 @@ export default function AuthProvider({ children }: any) {
 
     const checkAuth = async () => {
         try {
-           
+           console.log('first')
         } catch (error) {
             console.error(error)
         } finally {
