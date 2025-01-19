@@ -1,34 +1,40 @@
 'use client'
 
 import { useStore } from '@/hooks/useStore'
+import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
+import MainPageLoader from '../MainPageLoader'
 
-export default function AuthProvider({ children }: any) {
+export default function AuthProvider({ children }: Readonly<{ children: React.ReactNode }>) {
     const [isLoading, setIsLoading] = useState(true)
-
-    const { isAuthenticated, token, user, fetchProfile } = useStore((state) => ({
+    const router = useRouter()
+    const { isAuthenticated, fetchProfile } = useStore((state) => ({
         isAuthenticated: state.isAuthenticated,
         token: state.token,
         user: state.user,
         fetchProfile: state.fetchProfile
     }))
 
-    const checkAuth = async () => {
-        try {
-            fetchProfile()
-        } catch (error) {
-            console.error(error)
-        } finally {
-            setIsLoading(false)
-        }
-    }
-
     useEffect(() => {
-        checkAuth()
-    },[])
+        const checkAuth = async () => {
+            try {
+                const authenticatedOrNot = await fetchProfile()
+                if (!authenticatedOrNot) {
+                    router.push('/login')
+                    return
+                }
+            } catch (error) {
+                console.error(error)
+            }
+        }
+
+        checkAuth().finally(() => { 
+            setIsLoading(false)
+        }) 
+    }, [fetchProfile, isAuthenticated, router])
 
     if (isLoading) {
-        return <div>Loading...</div>
+        return <MainPageLoader />
     }
 
     return children

@@ -3,6 +3,7 @@ export interface AuthState {
     user: null | authUser
     token: string | null
     fetchProfile: () => Promise<boolean>
+    login: (email: string, password: string) => Promise<void>
 }
 
 export interface UserState {
@@ -10,7 +11,7 @@ export interface UserState {
     updatePreferences: (preferences: Record<string, unknown>) => void
 }
 
-export interface RootState extends AuthState { }
+export type RootState = AuthState
 
 export interface authUser {
     _id: string
