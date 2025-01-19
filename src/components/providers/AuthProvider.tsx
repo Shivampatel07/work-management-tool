@@ -3,6 +3,7 @@
 import { useStore } from '@/hooks/useStore'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
+import MainPageLoader from '../MainPageLoader'
 
 export default function AuthProvider({ children }: any) {
     const [isLoading, setIsLoading] = useState(true)
@@ -35,7 +36,7 @@ export default function AuthProvider({ children }: any) {
     },[])
 
     if (isLoading) {
-        return <div>Loading...</div>
+        return <MainPageLoader />
     }
 
     return children
