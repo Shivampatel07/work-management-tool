@@ -2,6 +2,7 @@
 import { StateCreator } from 'zustand'
 import { AuthState, authUser, RootState } from '../types'
 import { getRequestWithToken, postRequestWithoutToken } from '@/components/utils/axios.request'
+import toast from 'react-hot-toast'
 
 export const createAuthSlice: StateCreator<
     RootState,
@@ -51,7 +52,9 @@ export const createAuthSlice: StateCreator<
             await get().fetchProfile();
         } catch (error: any) {
             const status = error.response.status
-            console.log(status)
+            if ([404, 400].includes(status)) {
+                toast.error(error.response.data.message)
+            }
         }
     }
 })

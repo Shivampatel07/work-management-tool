@@ -1,15 +1,16 @@
 'use client'
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Lock, Mail, ArrowRight } from 'lucide-react';
 import InputType from '@/components/common/InputType';
 import Link from 'next/link';
 import { FieldValues, useForm } from 'react-hook-form';
 import { useStore } from '@/hooks/useStore';
 import { useRouter } from 'next/navigation';
+import Loader from '@/components/common/Loader';
 
 const LoginPage = () => {
-
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const {
     register,
     handleSubmit,
@@ -25,11 +26,14 @@ const LoginPage = () => {
 
   const onsubmit = async (data: FieldValues) => {
     try {
+      setIsSubmitting(true)
       const email = data.email
       const password = data.password
       await login(email, password)
     } catch (error) {
       console.log(error)
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -108,9 +112,14 @@ const LoginPage = () => {
             type="submit"
             className="w-full py-3 px-4 rounded-lg flex items-center justify-center space-x-2 transition-all hover:opacity-90"
             style={{ backgroundColor: '#8CB9C7' }}
+            disabled={isSubmitting}
           >
-            <span className="font-medium" style={{ color: '#16404D' }}>Sign In</span>
-            <ArrowRight className="w-5 h-5" style={{ color: '#16404D' }} />
+            {
+              isSubmitting ? <Loader color='#16404d' width='24px' height='24px' /> : <>
+                <span className="font-medium" style={{ color: '#16404D' }}>Sign In</span>
+                <ArrowRight className="w-5 h-5" style={{ color: '#16404D' }} />
+              </>
+            }
           </button>
 
           {/* Register Link */}
