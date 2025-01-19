@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { StoreProvider } from "@/components/providers/StoreProvider";
+import AuthProvider from "@/components/providers/AuthProvider";
 
 export const metadata: Metadata = {
   title: "WMT",
@@ -14,7 +16,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
+        <StoreProvider />
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );
