@@ -7,7 +7,7 @@ import { catchResponse, successResponse } from "@/lib/utils/index.utils";
 export const GET = apiHandler(verifyJwtMiddleware(async (req: CustomRequestWithUser) => {
 	try {
 		const userId = req.user.user_id;
-		const users = await userModel.find({ _id: userId }, '-__v -password');
+		const users = await userModel.findOne({ _id: userId }, '-__v -password');
 		return successResponse(users, "Users fetched successfully");
 	}
 	catch (error) {

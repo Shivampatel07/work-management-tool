@@ -1,7 +1,8 @@
 export interface AuthState {
     isAuthenticated: boolean
-    user: null | { id: string; name: string }
+    user: null | authUser
     token: string | null
+    fetchProfile: () => Promise<boolean>
 }
 
 export interface UserState {
@@ -10,3 +11,18 @@ export interface UserState {
 }
 
 export interface RootState extends AuthState { }
+
+export interface authUser {
+    _id: string
+    email: string
+    name: string
+    role: string
+    createdAt: Date
+    updatedAt: Date
+}
+
+export interface ISuccessResponse<T> {
+    success: number
+    data: T
+    message: string
+}
