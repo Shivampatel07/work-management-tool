@@ -28,6 +28,7 @@ export const createAuthSlice: StateCreator<
                 return true
             }
             return false
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
             const status = error.response.status
             if (status === 401) {

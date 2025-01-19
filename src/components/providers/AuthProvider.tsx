@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import MainPageLoader from '../MainPageLoader'
 
-export default function AuthProvider({ children }: any) {
+export default function AuthProvider({ children }: Readonly<{ children: React.ReactNode }>) {
     const [isLoading, setIsLoading] = useState(true)
     const router = useRouter()
     const { isAuthenticated, fetchProfile } = useStore((state) => ({
@@ -15,25 +15,23 @@ export default function AuthProvider({ children }: any) {
         fetchProfile: state.fetchProfile
     }))
 
-    const checkAuth = async () => {
-        try {
-            await fetchProfile()
-            if (isAuthenticated) {
-                router.push('/')
-            }
-            else {
-                router.push('/login')
-            }
-        } catch (error) {
-            console.error(error)
-        } finally {
-            setIsLoading(false)
-        }
-    }
-
     useEffect(() => {
-        checkAuth()
-    },[])
+        const checkAuth = async () => {
+            try {
+                const authenticatedOrNot = await fetchProfile()
+                if (!authenticatedOrNot) {
+                    router.push('/login')
+                    return
+                }
+            } catch (error) {
+                console.error(error)
+            }
+        }
+
+        checkAuth().finally(() => { 
+            setIsLoading(false)
+        }) 
+    }, [fetchProfile, isAuthenticated, router])
 
     if (isLoading) {
         return <MainPageLoader />

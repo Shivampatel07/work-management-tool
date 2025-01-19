@@ -22,7 +22,7 @@ export default function MainPageLoader() {
     }, 2500);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [quotes.length]);
 
   return (
     <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#16404D' }}>

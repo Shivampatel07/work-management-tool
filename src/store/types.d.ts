@@ -10,7 +10,7 @@ export interface UserState {
     updatePreferences: (preferences: Record<string, unknown>) => void
 }
 
-export interface RootState extends AuthState { }
+export type RootState = AuthState
 
 export interface authUser {
     _id: string
