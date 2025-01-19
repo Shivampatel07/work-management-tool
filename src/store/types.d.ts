@@ -3,6 +3,7 @@ export interface AuthState {
     user: null | authUser
     token: string | null
     fetchProfile: () => Promise<boolean>
+    login: (email: string, password: string) => Promise<void>
 }
 
 export interface UserState {

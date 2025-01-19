@@ -1,13 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { StateCreator } from 'zustand'
 import { AuthState, authUser, RootState } from '../types'
-import { getRequestWithToken } from '@/components/utils/axios.request'
+import { getRequestWithToken, postRequestWithoutToken } from '@/components/utils/axios.request'
 
 export const createAuthSlice: StateCreator<
     RootState,
     [],
     [],
     AuthState
-> = (set) => ({
+> = (set, get) => ({
     isAuthenticated: false,
     user: null,
     token: null,
@@ -28,7 +29,6 @@ export const createAuthSlice: StateCreator<
                 return true
             }
             return false
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
             const status = error.response.status
             if (status === 401) {
@@ -36,6 +36,22 @@ export const createAuthSlice: StateCreator<
             }
             return false
         }
+    },
+    login: async (email: string, password: string) => {
+        try {
+            const requestData = {
+                email,
+                password
+            }
 
+            const response = await postRequestWithoutToken<{ token: string }>('auth/login', requestData)
+            const data = response.data.data
+            const token = data.token
+            localStorage.setItem('token', token)
+            await get().fetchProfile();
+        } catch (error: any) {
+            const status = error.response.status
+            console.log(status)
+        }
     }
 })

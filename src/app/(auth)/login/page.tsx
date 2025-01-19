@@ -1,11 +1,44 @@
 'use client'
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Lock, Mail, ArrowRight } from 'lucide-react';
 import InputType from '@/components/common/InputType';
 import Link from 'next/link';
+import { FieldValues, useForm } from 'react-hook-form';
+import { useStore } from '@/hooks/useStore';
+import { useRouter } from 'next/navigation';
 
 const LoginPage = () => {
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
+
+  const router = useRouter()
+
+  const { login, isAuthenticated } = useStore((state) => ({
+    login: state.login,
+    isAuthenticated: state.isAuthenticated
+  }))
+
+  const onsubmit = async (data: FieldValues) => {
+    try {
+      const email = data.email
+      const password = data.password
+      await login(email, password)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push('/')
+    }
+  }, [isAuthenticated, router])
+
   return (
     <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#16404D' }}>
       <div className="w-full max-w-md p-8 rounded-lg" style={{ backgroundColor: 'rgba(184, 216, 225, 0.05)' }}>
@@ -20,7 +53,7 @@ const LoginPage = () => {
         </div>
 
         {/* Login Form */}
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={handleSubmit(onsubmit)}>
           {/* Email Field */}
           <div>
             <label className="block text-sm font-medium mb-2" style={{ color: '#8CB9C7' }}>
@@ -28,8 +61,16 @@ const LoginPage = () => {
             </label>
             <InputType
               Icon={Mail}
-              type='email'
-              placeholder='Enter your email' />
+              type='text'
+              placeholder='Enter your email'
+              {...register('email', {
+                required: 'Email is required',
+                pattern: {
+                  value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+                  message: 'Invalid email address'
+                }
+              })}
+              errorMessage={errors.email?.message?.toString()} />
           </div>
 
           {/* Password Field */}
@@ -40,7 +81,15 @@ const LoginPage = () => {
             <InputType
               Icon={Lock}
               type="password"
-              placeholder='Enter your password' />
+              placeholder='Enter your password'
+              {...register('password', {
+                required: 'Password is required',
+                minLength: {
+                  value: 5,
+                  message: 'Password must be at least 5 characters'
+                }
+              })}
+              errorMessage={errors.password?.message?.toString()} />
           </div>
 
           {/* Forgot Password Link */}
