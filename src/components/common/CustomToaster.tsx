@@ -25,10 +25,6 @@ export default function CustomToaster() {
             containerStyle={{}}
             toastOptions={{
                 duration: 5000,
-                style: {
-                    background: '#333',
-                    color: '#fff',
-                },
             }}
         />
     );
