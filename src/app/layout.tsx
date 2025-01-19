@@ -5,8 +5,21 @@ import AuthProvider from "@/components/providers/AuthProvider";
 import CustomToaster from "@/components/common/CustomToaster";
 
 export const metadata: Metadata = {
-  title: "WMT",
-  description: "Work management tool",
+  title: "Discusync - Streamlined Work Management & Team Collaboration",
+  description: "Discusync is a powerful work management tool designed for teams. Streamline communication, task management, and collaboration in one seamless platform.",
+  icons: '/favicon.ico',
+  openGraph: {
+    title: "Discusync - Streamlined Work Management & Team Collaboration",
+    description: "Discusync is a powerful work management tool designed for teams. Streamline communication, task management, and collaboration in one seamless platform.",
+    type: "website",
+    url: "https://discusync.vercel.app",
+    images: [
+      {
+        url: "/logo.png",
+        alt: "Discusync - Streamlined Work Management & Team Collaboration",
+      },
+    ],
+  }
 };
 
 export default function RootLayout({
