@@ -56,5 +56,24 @@ export const createAuthSlice: StateCreator<
                 toast.error(error.response.data.message)
             }
         }
+    },
+    register: async (email: string, password: string) => {
+        try {
+            const requestData = {
+                email,
+                password
+            }
+
+            const response = await postRequestWithoutToken<{ token: string }>('auth/register', requestData)
+            const data = response.data.data
+            const token = data.token
+            localStorage.setItem('token', token)
+            await get().fetchProfile();
+        } catch (error: any) {
+            const status = error.response.status
+            if ([404, 400].includes(status)) {
+                toast.error(error.response.data.message)
+            }
+        }
     }
 })

@@ -1,13 +1,15 @@
 'use client'
 
 import { useStore } from '@/hooks/useStore'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import MainPageLoader from '../MainPageLoader'
 
 export default function AuthProvider({ children }: Readonly<{ children: React.ReactNode }>) {
-    const [isLoading, setIsLoading] = useState(true)
     const router = useRouter()
+    const path = usePathname()
+    const [isLoading, setIsLoading] = useState(true)
+
     const { isAuthenticated, fetchProfile } = useStore((state) => ({
         isAuthenticated: state.isAuthenticated,
         token: state.token,
@@ -19,7 +21,8 @@ export default function AuthProvider({ children }: Readonly<{ children: React.Re
         const checkAuth = async () => {
             try {
                 const authenticatedOrNot = await fetchProfile()
-                if (!authenticatedOrNot) {
+                const publicPath = ['/login', '/register']
+                if (!authenticatedOrNot && !publicPath.includes(path)) {
                     router.push('/login')
                     return
                 }
@@ -31,7 +34,7 @@ export default function AuthProvider({ children }: Readonly<{ children: React.Re
         checkAuth().finally(() => { 
             setIsLoading(false)
         }) 
-    }, [fetchProfile, isAuthenticated, router])
+    }, [fetchProfile, isAuthenticated, path, router])
 
     if (isLoading) {
         return <MainPageLoader />
