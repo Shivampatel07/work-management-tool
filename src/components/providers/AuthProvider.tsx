@@ -1,12 +1,13 @@
 'use client'
 
 import { useStore } from '@/hooks/useStore'
+import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
 export default function AuthProvider({ children }: any) {
     const [isLoading, setIsLoading] = useState(true)
-
-    const { isAuthenticated, token, user, fetchProfile } = useStore((state) => ({
+    const router = useRouter()
+    const { isAuthenticated, fetchProfile } = useStore((state) => ({
         isAuthenticated: state.isAuthenticated,
         token: state.token,
         user: state.user,
@@ -15,7 +16,13 @@ export default function AuthProvider({ children }: any) {
 
     const checkAuth = async () => {
         try {
-            fetchProfile()
+            await fetchProfile()
+            if (isAuthenticated) {
+                router.push('/')
+            }
+            else {
+                router.push('/login')
+            }
         } catch (error) {
             console.error(error)
         } finally {
