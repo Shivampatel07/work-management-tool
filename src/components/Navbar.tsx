@@ -17,12 +17,15 @@ import {
     SheetDescription,
 } from "@/components/ui/sheet"
 import { Button } from '@/components/ui/button'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 export default function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false)
+    const router = useRouter()
 
     const menuItems = [
-        { label: 'Profile', onClick: () => console.log('Profile clicked') },
+        { label: 'Profile', onClick: () => router.push('/profile') },
         { label: 'Theme changes', onClick: () => console.log('Theme clicked') },
         { label: 'Change password', onClick: () => console.log('Password clicked') },
         { label: 'Logout', onClick: () => console.log('Logout clicked'), className: 'text-red-500' }
@@ -106,7 +109,7 @@ export default function Navbar() {
 
     return (
         <div className="flex justify-between items-center px-4 py-3 bg-[#16404D] text-white h-[52px]">
-            <h1 className="text-lg font-bold">Discusync</h1>
+            <Link className="text-lg font-bold" href={'/'}>Discusync</Link>
 
             {/* Desktop Menu (hidden on mobile) */}
             <div className="hidden md:block">
