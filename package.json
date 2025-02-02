@@ -9,8 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.5",
+    "@radix-ui/react-dropdown-menu": "^2.1.5",
+    "@radix-ui/react-slot": "^1.1.1",
     "axios": "^1.7.9",
     "bcryptjs": "^2.4.3",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "cors": "^2.8.5",
     "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
@@ -22,6 +27,8 @@
     "react-hook-form": "^7.54.2",
     "react-hot-toast": "^2.5.1",
     "socket.io-client": "^4.8.1",
+    "tailwind-merge": "^3.0.1",
+    "tailwindcss-animate": "^1.0.7",
     "uuid": "^11.0.3",
     "zustand": "^5.0.3"
   },
