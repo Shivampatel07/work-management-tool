@@ -19,6 +19,9 @@ export interface authUser {
     email: string
     name: string
     role: string
+    profilePicture: string
+    status: string
+    is_online: boolean
     createdAt: Date
     updatedAt: Date
 }

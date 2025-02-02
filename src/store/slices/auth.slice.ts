@@ -24,7 +24,17 @@ export const createAuthSlice: StateCreator<
                 const userData = response.data
                 set(() => ({
                     isAuthenticated: true,
-                    user: userData.data,
+                    user: {
+                        _id: userData.data._id,
+                        email: userData.data.email,
+                        name: userData.data.name || "",
+                        role: userData.data.role,
+                        profilePicture: userData.data.profilePicture || "",
+                        status: userData.data.status,
+                        is_online: userData.data.is_online,
+                        createdAt: new Date(userData.data.createdAt),
+                        updatedAt: new Date(userData.data.updatedAt)
+                    },
                     token
                 }))
                 return true
