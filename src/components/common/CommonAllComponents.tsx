@@ -9,7 +9,7 @@ import { usePathname } from 'next/navigation'
 export default function CommonAllComponents({ children }: Readonly<{ children: React.ReactNode }>) {
 
     const path = usePathname()
-    const sideBarBlockedRoutes = ['/profile']
+    const sideBarBlockedRoutes = ['']
 
     const { isAuthenticated } = useStore((state) => ({
         isAuthenticated: state.isAuthenticated,

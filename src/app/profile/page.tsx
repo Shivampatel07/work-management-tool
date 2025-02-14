@@ -3,10 +3,17 @@
 import { Button } from '@/components/ui/button'
 import { useStore } from '@/hooks/useStore'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
 export default function ProfilePage() {
     const user = useStore((state) => state.user)
+    const router = useRouter()
+
+    const redirectToEditProfile = () => {
+        router.push('/profile/edit')
+    }
+
     return (
         <div className='w-full h-[calc(100vh-52px)] flex justify-center items-center bg-white text-white'>
             <div className='w-[450px] bg-[#12323A] border border-gray-600 rounded-lg shadow-lg p-6'>
@@ -28,7 +35,7 @@ export default function ProfilePage() {
                     <p className='text-gray-300 text-sm'>{user?.email || "Not Available"}</p>
                 </div>
                 <div className='mt-6 flex justify-center'>
-                    <Button variant='default' size='lg' className='bg-[#24697D] text-white hover:bg-[#2E7E91] px-6 py-2 rounded-md shadow-md'>Edit Profile</Button>
+                    <Button variant='default' size='lg' className='bg-[#24697D] text-white hover:bg-[#2E7E91] px-6 py-2 rounded-md shadow-md' onClick={redirectToEditProfile}>Edit Profile</Button>
                 </div>
             </div>
         </div>
