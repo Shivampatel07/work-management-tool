@@ -4,6 +4,7 @@ export interface AuthState {
     token: string | null
     fetchProfile: () => Promise<boolean>
     login: (email: string, password: string) => Promise<void>
+    logout: () => Promise<void>
     register: (email: string, password: string) => Promise<void>
 }
 

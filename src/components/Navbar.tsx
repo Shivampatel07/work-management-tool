@@ -19,16 +19,28 @@ import {
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { useStore } from '@/hooks/useStore'
 
 export default function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false)
+  const { logout } = useStore((state) => ({
+    logout: state.logout,
+  }))
+
     const router = useRouter()
+    const handleLogout = async () => {
+        try {
+            await logout()
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     const menuItems = [
         { label: 'Profile', onClick: () => router.push('/profile') },
         { label: 'Theme changes', onClick: () => console.log('Theme clicked') },
         { label: 'Change password', onClick: () => console.log('Password clicked') },
-        { label: 'Logout', onClick: () => console.log('Logout clicked'), className: 'text-red-500' }
+        { label: 'Logout', onClick: handleLogout, className: 'text-red-500' }
     ]
 
     // Desktop Menu Component

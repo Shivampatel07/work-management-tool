@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { StateCreator } from 'zustand'
 import { AuthState, authUser, RootState } from '../types'
-import { getRequestWithToken, postRequestWithoutToken } from '@/components/utils/axios.request'
+import { getRequestWithToken, postRequestWithoutToken, postRequestWithToken } from '@/components/utils/axios.request'
 import toast from 'react-hot-toast'
 
 export const createAuthSlice: StateCreator<
@@ -84,6 +84,22 @@ export const createAuthSlice: StateCreator<
             if ([404, 400].includes(status)) {
                 toast.error(error.response.data.message)
             }
+        }
+    },
+    logout: async () => {
+        const token = localStorage.getItem('token') || null
+        if (!token) {
+            return
+        }
+
+        const response = await postRequestWithToken('auth/logout', {}, token || '')
+        if (response.data.success === 1) {
+            localStorage.removeItem('token')
+            set(() => ({
+                isAuthenticated: false,
+                user: null,
+                token: null
+            }))
         }
     }
 })

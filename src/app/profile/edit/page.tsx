@@ -22,7 +22,7 @@ export default function ProfilePage() {
     });
 
     const handleSave = (data: { name: string, email: string, profilePicture: string }) => {
-        console.log('Updated Profile:', data, previewImage);
+        console.log('Updated Profile:', data);
     };
 
     const handleImageChange = (e: any) => {
