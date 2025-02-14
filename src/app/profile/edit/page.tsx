@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { useStore } from '@/hooks/useStore'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 export default function ProfilePage() {
@@ -25,7 +25,7 @@ export default function ProfilePage() {
         console.log('Updated Profile:', data);
     };
 
-    const handleImageChange = (e: any) => {
+    const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) {
             const reader = new FileReader();
