@@ -4,9 +4,10 @@ import React, { useState } from 'react'
 interface InputTypeProps {
     Icon?: React.ForwardRefExoticComponent<Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>>
     errorMessage?: string
+    className?: string
 }
 
-export default function InputType({ Icon, errorMessage, ...props }: InputTypeProps & React.InputHTMLAttributes<HTMLInputElement>) {
+export default function InputType({ Icon, errorMessage, className, ...props }: InputTypeProps & React.InputHTMLAttributes<HTMLInputElement>) {
     const [showPassword, setShowPassword] = useState(false)
 
     const togglePasswordShow = () => {
@@ -15,11 +16,11 @@ export default function InputType({ Icon, errorMessage, ...props }: InputTypePro
 
     return (
         <>
-            <div className="relative">
+            <div className="relative w-full">
                 {Icon && <Icon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5" style={{ color: '#8CB9C7' }} />}
                 <input
                     {...props}
-                    className="w-full px-10 py-3 rounded-lg bg-white bg-opacity-10 border transition-all outline-none"
+                    className={`${className || ''} w-full px-10 py-3 rounded-lg bg-white bg-opacity-10 border transition-all outline-none`}
                     style={{
                         borderColor: '#8CB9C7',
                         color: '#B8D8E1',
