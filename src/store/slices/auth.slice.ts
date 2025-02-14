@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { StateCreator } from 'zustand'
 import { AuthState, authUser, RootState } from '../types'
-import { getRequestWithToken, postRequestWithoutToken } from '@/components/utils/axios.request'
+import { getRequestWithToken, postRequestWithoutToken, postRequestWithToken } from '@/components/utils/axios.request'
 import toast from 'react-hot-toast'
 
 export const createAuthSlice: StateCreator<
@@ -24,7 +24,17 @@ export const createAuthSlice: StateCreator<
                 const userData = response.data
                 set(() => ({
                     isAuthenticated: true,
-                    user: userData.data,
+                    user: {
+                        _id: userData.data._id,
+                        email: userData.data.email,
+                        name: userData.data.name || "",
+                        role: userData.data.role,
+                        profilePicture: userData.data.profilePicture || "",
+                        status: userData.data.status,
+                        is_online: userData.data.is_online,
+                        createdAt: new Date(userData.data.createdAt),
+                        updatedAt: new Date(userData.data.updatedAt)
+                    },
                     token
                 }))
                 return true
@@ -74,6 +84,22 @@ export const createAuthSlice: StateCreator<
             if ([404, 400].includes(status)) {
                 toast.error(error.response.data.message)
             }
+        }
+    },
+    logout: async () => {
+        const token = localStorage.getItem('token') || null
+        if (!token) {
+            return
+        }
+
+        const response = await postRequestWithToken('auth/logout', {}, token || '')
+        if (response.data.success === 1) {
+            localStorage.removeItem('token')
+            set(() => ({
+                isAuthenticated: false,
+                user: null,
+                token: null
+            }))
         }
     }
 })

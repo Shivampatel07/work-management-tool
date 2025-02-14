@@ -3,6 +3,7 @@ import "./globals.css";
 import { StoreProvider } from "@/components/providers/StoreProvider";
 import AuthProvider from "@/components/providers/AuthProvider";
 import CustomToaster from "@/components/common/CustomToaster";
+import CommonAllComponents from "@/components/common/CommonAllComponents";
 
 export const metadata: Metadata = {
   title: "Discusync - Streamlined Work Management & Team Collaboration",
@@ -38,7 +39,9 @@ export default function RootLayout({
 
         {/* AuthProvider is a custom provider that wraps the entire application */}
         <AuthProvider>
-          {children}
+          <CommonAllComponents >
+            {children}
+          </CommonAllComponents>
         </AuthProvider>
       </body>
     </html>
