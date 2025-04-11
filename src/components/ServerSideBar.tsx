@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import React from 'react'
+import { v4 } from 'uuid'
 
 export default function ServerSideBar() {
   const getFirstLetters = (input: string) => {
@@ -29,13 +30,13 @@ export default function ServerSideBar() {
     {
       profileImageUrl: 'https://res.cloudinary.com/dj43xxam7/image/upload/v1737873289/eliscops_zend86.png',
       name: 'Eliscops',
-      joinId: crypto.randomUUID(),
+      joinId: v4(),
       role: 'Admin',
     },
     {
       profileImageUrl: '',
       name: 'Shivam Patel',
-      joinId: crypto.randomUUID(),
+      joinId: v4(),
       role: 'Admin',
     },
   ]
