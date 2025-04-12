@@ -9,7 +9,7 @@ export const createWorkSpaceSlice: StateCreator<
 	[],
 	[],
 	WorkspaceState
-> = (set, get) => ({
+> = (set) => ({
 	workspaces: [],
 	fetchWorkspaces: async () => {
 		try {
