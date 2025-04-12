@@ -53,7 +53,7 @@ export default function ServerSideBar() {
     <div className='px-2 py-4 w-20 bg-secondary dark:bg-secondary'>
       <div className='h-full flex flex-col items-center justify-between'>
         <div className='flex flex-col items-center h-full overflow-y-auto custom-scrollbar'>
-          <Link href={'/profile'} className='border-b border-text3 pb-5'>
+          <Link href={'/profile'} className='border-b border-text3 dark:border-text3 pb-5'>
             <SquareUser className='w-8 h-8 rounded-md object-contain bg-white' />
           </Link>
           <div className='flex flex-col items-center gap-3 mt-5'>

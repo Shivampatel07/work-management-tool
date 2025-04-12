@@ -4,6 +4,7 @@ import { StoreProvider } from "@/components/providers/StoreProvider";
 import AuthProvider from "@/components/providers/AuthProvider";
 import CustomToaster from "@/components/common/CustomToaster";
 import CommonAllComponents from "@/components/common/CommonAllComponents";
+import DarkModuleHandler from "@/components/providers/DarkModuleHandler";
 
 export const metadata: Metadata = {
   title: "Discusync - Streamlined Work Management & Team Collaboration",
@@ -31,18 +32,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {/* StoreProvider is a custom provider that wraps the entire application */}
-        <StoreProvider />
+        <DarkModuleHandler>
+          {/* StoreProvider is a custom provider that wraps the entire application */}
+          <StoreProvider />
 
-        {/* Toaster is a toast provider that wraps the entire application to show toast notifications*/}
-        <CustomToaster />
+          {/* Toaster is a toast provider that wraps the entire application to show toast notifications*/}
+          <CustomToaster />
 
-        {/* AuthProvider is a custom provider that wraps the entire application */}
-        <AuthProvider>
-          <CommonAllComponents >
-            {children}
-          </CommonAllComponents>
-        </AuthProvider>
+          {/* AuthProvider is a custom provider that wraps the entire application */}
+          <AuthProvider>
+            <CommonAllComponents >
+              {children}
+            </CommonAllComponents>
+          </AuthProvider>
+        </DarkModuleHandler>
       </body>
     </html>
   );

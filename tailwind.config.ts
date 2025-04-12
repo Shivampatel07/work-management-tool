@@ -50,9 +50,9 @@ export default {
 					'4': 'var(--chart-4)',
 					'5': 'var(--chart-5)'
 				},
-				text1: 'var(--text-1)',
-				text2: 'var(--text-2)',
-				text3: 'var(--text-3)',
+				text1: 'var(--text1)',
+				text2: 'var(--text2)',
+				text3: 'var(--text3)',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
