@@ -48,7 +48,7 @@ export default function CommonAllComponents({ children }: Readonly<{ children: R
                     }}
                     exit={{ x: '-75px' }} // Exit state (hidden off-screen)
                     transition={{ duration: 0.3, ease: 'easeInOut' }}
-                    className="w-full h-full">{children}</motion.div>
+                    className={`${showSideBar ? 'w-[calc(100vw-75px)]' : 'w-full'} h-full`}>{children}</motion.div>
             </div>
         </div>
     );
