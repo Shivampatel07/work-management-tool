@@ -28,6 +28,10 @@ export default {
 					DEFAULT: 'var(--secondary)',
 					foreground: 'var(--secondary-foreground)'
 				},
+				ternary: {
+					DEFAULT: 'var(--ternary)',
+					foreground: 'var(--ternary-foreground)'
+				},
 				muted: {
 					DEFAULT: 'var(--muted)',
 					foreground: 'var(--muted-foreground)'
@@ -41,7 +45,6 @@ export default {
 					foreground: 'var(--destructive-foreground)'
 				},
 				border: 'var(--border)',
-				input: 'var(--input)',
 				ring: 'var(--ring)',
 				chart: {
 					'1': 'var(--chart-1)',
@@ -49,6 +52,13 @@ export default {
 					'3': 'var(--chart-3)',
 					'4': 'var(--chart-4)',
 					'5': 'var(--chart-5)'
+				},
+				input: {
+					'bg': 'var(--input-background)',
+					'ring': 'var(--input-focus-border)',
+					'placeholder': 'var(--input-placeholder)',
+					'border': 'var(--input-border)',
+					'text': 'var(--input-text)'
 				},
 				text1: 'var(--text1)',
 				text2: 'var(--text2)',
