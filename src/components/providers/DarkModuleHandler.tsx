@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
-export default function DarkModuleHandler({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function DarkModuleHandler() {
   useEffect(() => {
     const updateDarkMode = (e: MediaQueryListEvent) => {
       if (e.matches) {
@@ -30,5 +30,5 @@ export default function DarkModuleHandler({ children }: Readonly<{ children: Rea
     };
   }, []);
 
-  return <>{children}</>;
+  return null;
 }

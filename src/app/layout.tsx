@@ -32,20 +32,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <DarkModuleHandler>
-          {/* StoreProvider is a custom provider that wraps the entire application */}
-          <StoreProvider />
+        <DarkModuleHandler />
+        {/* StoreProvider is a custom provider that wraps the entire application */}
+        <StoreProvider />
 
-          {/* Toaster is a toast provider that wraps the entire application to show toast notifications*/}
-          <CustomToaster />
+        {/* Toaster is a toast provider that wraps the entire application to show toast notifications*/}
+        <CustomToaster />
 
-          {/* AuthProvider is a custom provider that wraps the entire application */}
-          <AuthProvider>
-            <CommonAllComponents >
-              {children}
-            </CommonAllComponents>
-          </AuthProvider>
-        </DarkModuleHandler>
+        {/* AuthProvider is a custom provider that wraps the entire application */}
+        <AuthProvider>
+          <CommonAllComponents >
+            {children}
+          </CommonAllComponents>
+        </AuthProvider>
       </body>
     </html>
   );
