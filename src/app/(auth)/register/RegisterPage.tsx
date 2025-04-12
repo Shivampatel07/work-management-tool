@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react';
-import { Lock, Mail, ArrowRight } from 'lucide-react';
+import { Lock, Mail, ArrowRight, IdCard } from 'lucide-react';
 import InputType from '@/components/common/InputType';
 import Link from 'next/link';
 import { FieldValues, useForm } from 'react-hook-form';
@@ -27,8 +27,7 @@ const RegisterPage = () => {
   const onSubmit = async (data: FieldValues) => {
     try {
       setIsSubmitting(true);
-      console.log(data)
-      await registerUser(data.email, data.create_password);
+      await registerUser(data.email, data.create_password, data.name);
     } catch (error) {
       console.log(error);
     } finally {
@@ -72,6 +71,20 @@ const RegisterPage = () => {
                   value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
                   message: 'Invalid email address'
                 }
+              })}
+              errorMessage={errors.email?.message?.toString()} />
+          </div>
+          {/* Name Field */}
+          <div>
+            <label className="block text-sm font-medium mb-2" style={{ color: '#8CB9C7' }}>
+              Name
+            </label>
+            <InputType
+              Icon={IdCard}
+              type='text'
+              placeholder='Enter your name'
+              {...register('name', {
+                required: 'Name is required',
               })}
               errorMessage={errors.email?.message?.toString()} />
           </div>

@@ -1,7 +1,6 @@
 'use client'
 
 import React from 'react'
-import Navbar from '../Navbar'
 import { useStore } from '@/hooks/useStore'
 import ServerSideBar from '../ServerSideBar'
 import { usePathname } from 'next/navigation'
@@ -21,8 +20,7 @@ export default function CommonAllComponents({ children }: Readonly<{ children: R
 
     return (
         <div className='flex flex-col'>
-            <Navbar />
-            <div className='flex flex-row h-[calc(100vh-52px)] w-full'>
+            <div className='flex flex-row h-svh w-full'>
                 {!sideBarBlockedRoutes.includes(path) && <ServerSideBar />}
                 <div className='w-full'>
                     {children}
