@@ -58,7 +58,8 @@ export default {
 					'ring': 'var(--input-focus-border)',
 					'placeholder': 'var(--input-placeholder)',
 					'border': 'var(--input-border)',
-					'text': 'var(--input-text)'
+					'text': 'var(--input-text)',
+					'label': 'var(--input-label)',
 				},
 				text1: 'var(--text1)',
 				text2: 'var(--text2)',

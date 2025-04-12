@@ -33,8 +33,8 @@ export default function InputType({ Icon, errorMessage, className, ...props }: I
                 )}
             </div>
             {errorMessage && <div className="flex items-center gap-2 mt-1">
-                <AlertCircle className="w-4 h-4 text-red-400" />
-                <p className="text-xs text-red-400 font-medium">{errorMessage}</p>
+                <AlertCircle className="w-4 h-4 text-red-500" />
+                <p className="text-xs text-red-500 font-medium">{errorMessage}</p>
             </div>}
         </>
     )
