@@ -44,6 +44,8 @@
         --input-focus-border: #0a0a0a;
         --input-text: #0a0a0a;
         --input-label: #0a0a0a;
+        --border-color1: #cecece;
+        --border-color2: #939393;
     }
   .dark {
         --background: #0a0a0a;
@@ -81,5 +83,7 @@
         --input-focus-border: #fafafa;
         --input-text: #fafafa;
         --input-label: #fafafa;
+        --border-color1: #555555;
+        --border-color2: #a1a1a1;
     }
 }

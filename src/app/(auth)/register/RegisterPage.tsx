@@ -43,7 +43,7 @@ const RegisterPage = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-secondary dark:bg-secondary">
-      <div className="w-full max-w-md p-8 rounded-lg bg-ternary dark:bg-ternary shadow-lg text-text1 dark:text-text1" >
+      <div className="w-full max-w-md p-8 rounded-lg bg-ternary dark:bg-ternary shadow-lg text-text1 dark:text-text1 border border-border-color1 dark:border-border-color1" >
         {/* Logo/Brand Area */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold">

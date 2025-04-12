@@ -44,7 +44,10 @@ export default {
 					DEFAULT: 'var(--destructive)',
 					foreground: 'var(--destructive-foreground)'
 				},
-				border: 'var(--border)',
+				border: {
+					color1: 'var(--border-color1)',
+					color2: 'var(--border-color2)',
+				},
 				ring: 'var(--ring)',
 				chart: {
 					'1': 'var(--chart-1)',
