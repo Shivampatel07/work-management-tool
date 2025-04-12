@@ -5,6 +5,7 @@ import { useStore } from '@/hooks/useStore';
 import ServerSideBar from '../ServerSideBar';
 import { usePathname } from 'next/navigation';
 import Navbar from '../Navbar';
+import { motion } from 'motion/react'
 
 export default function CommonAllComponents({ children }: Readonly<{ children: React.ReactNode }>) {
     const path = usePathname();
@@ -37,10 +38,17 @@ export default function CommonAllComponents({ children }: Readonly<{ children: R
     return (
         <div className="flex flex-col h-dvh">
             <Navbar hideShowSideBar={() => setShowSideBar((prev) => !prev)} />
-            <div className={`flex flex-row w-full ${showSideBar ? 'h-full md:h-[calc(100vh-4rem)] ': 'h-full'}`}>                {!sideBarBlockedRoutes.includes(path) && (
-                    <ServerSideBar hideSideBar={!showSideBar} />
-                )}
-                <div className="w-full h-full">{children}</div>
+            <div className={`flex flex-row w-full ${showSideBar ? 'md:h-full h-[calc(100dvh-2rem)] ' : 'h-dvh'}`}>                {!sideBarBlockedRoutes.includes(path) && (
+                <ServerSideBar hideSideBar={!showSideBar} />
+            )}
+                <motion.div
+                    initial={{ x: '-75px' }} // Initial state (hidden off-screen)
+                    animate={{
+                      x: !showSideBar ? '-75px' : '0%', // Slide in or out based on hideSideBar
+                    }}
+                    exit={{ x: '-75px' }} // Exit state (hidden off-screen)
+                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                    className="w-full h-full">{children}</motion.div>
             </div>
         </div>
     );

@@ -53,14 +53,16 @@ export default function ServerSideBar({ hideSideBar }: {  hideSideBar?: boolean 
   return (
     <>
       {<motion.div
-        initial={{ x: '-100%', opacity: 0 }} // Initial state (hidden)
-        animate={{ x: hideSideBar ? '-100%' : '0%', opacity: hideSideBar ? 0 : 1 }} // Animate to visible/hidden
-        exit={{ x: '-100%', opacity: 0 }} // Exit state (hidden)
-        transition={{ duration: 0.3, ease: 'easeInOut' }} // Animation duration and easing
-        className={`px-2 py-4 w-20 bg-secondary dark:bg-secondary h-full`}
+        initial={{ x: '-100%' }} // Initial state (hidden off-screen)
+        animate={{
+          x: hideSideBar ? '-100%' : '0%', // Slide in or out based on hideSideBar
+        }}
+        exit={{ x: '-100%' }} // Exit state (hidden off-screen)
+        transition={{ duration: 0.3, ease: 'easeInOut' }} // Smooth transition
+        className={`px-2 py-4 w-20 bg-secondary dark:bg-secondary`} // Fixed width of 20rem
       >
-        <div className='h-full flex flex-col items-center justify-between'>
-          <div className='flex flex-col items-center h-full overflow-y-auto custom-scrollbar'>
+        <div className='h-full flex flex-col items-center justify-between w-full'>
+          <div className='flex flex-col items-center h-full overflow-y-auto custom-scrollbar w-full'>
             <Link href={'/profile'} className='border-b border-text3 dark:border-text3 pb-5'>
               <SquareUser className='w-8 h-8 rounded-md object-contain bg-white' />
             </Link>
