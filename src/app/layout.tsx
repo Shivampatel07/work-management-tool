@@ -4,6 +4,7 @@ import { StoreProvider } from "@/components/providers/StoreProvider";
 import AuthProvider from "@/components/providers/AuthProvider";
 import CustomToaster from "@/components/common/CustomToaster";
 import CommonAllComponents from "@/components/common/CommonAllComponents";
+import DarkModuleHandler from "@/components/providers/DarkModuleHandler";
 
 export const metadata: Metadata = {
   title: "Discusync - Streamlined Work Management & Team Collaboration",
@@ -31,6 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <DarkModuleHandler />
         {/* StoreProvider is a custom provider that wraps the entire application */}
         <StoreProvider />
 

@@ -25,16 +25,15 @@ export default function MainPageLoader() {
   }, [quotes.length]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#16404D' }}>
+    <div className="min-h-screen flex items-center justify-center bg-background dark:bg-foreground">
       <div className="text-center">
         {/* Bouncing Dots Animation */}
         <div className="flex justify-center mb-8 space-x-2">
           {[...Array(3)].map((_, i) => (
             <div
               key={i}
-              className="w-4 h-4 rounded-full animate-bounce"
+              className="w-4 h-4 rounded-full animate-bounce bg-foreground dark:bg-background"
               style={{
-                backgroundColor: '#8CB9C7',
                 animationDelay: `${i * 0.15}s`,
                 animationDuration: '0.8s',
                 boxShadow: '0 0 10px rgba(140, 185, 199, 0.5)'
@@ -46,9 +45,8 @@ export default function MainPageLoader() {
         {/* Quote Display */}
         <div className="h-8">
           <p
-            className="text-lg font-medium transition-opacity duration-300"
+            className="text-lg font-medium transition-opacity duration-300 text-foreground dark:text-background"
             style={{
-              color: '#B8D8E1',
               opacity: 1,
               transform: 'translateY(0)',
               animation: 'fadeInOut 2.5s infinite',

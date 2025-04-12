@@ -1,12 +1,8 @@
 import { ISuccessResponse } from "@/store/types";
 import axios from "axios";
 
-export function getRequestWithToken<T>(path: string, token: string) {
-    return axios.get<ISuccessResponse<T>>(`/api/${path}`, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        }
-    });
+export function getRequestWithToken<T>(path: string) {
+    return axios.get<ISuccessResponse<T>>(`/api/${path}`);
 }
 
 export function postRequestWithoutToken<T>(path: string, data: Record<string, unknown>) {

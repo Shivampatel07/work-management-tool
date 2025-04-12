@@ -8,6 +8,8 @@ export interface IWorkspace extends mongoose.Document {
     role: string;
     user: mongoose.Schema.Types.ObjectId;
   }[];
+  uuid: string;
+  image?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -22,6 +24,15 @@ const WorkspaceSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "users",
     required: true
+  },
+  uuid: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  image: {
+    type: String,
+    default: ""
   },
   members: [
     {

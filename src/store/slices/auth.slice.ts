@@ -3,6 +3,7 @@ import { StateCreator } from 'zustand'
 import { AuthState, authUser, RootState } from '../types'
 import { getRequestWithToken, postRequestWithoutToken, postRequestWithToken } from '@/components/utils/axios.request'
 import toast from 'react-hot-toast'
+import axios from 'axios'
 
 export const createAuthSlice: StateCreator<
     RootState,
@@ -16,10 +17,11 @@ export const createAuthSlice: StateCreator<
     fetchProfile: async () => {
         try {
             const token = localStorage.getItem('token') || null
+            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
             if (!token) {
                 return false
             }
-            const response = await getRequestWithToken<authUser>('auth/profile', token || '')
+            const response = await getRequestWithToken<authUser>('auth/profile')
             if (response.status === 200) {
                 const userData = response.data
                 set(() => ({
@@ -67,11 +69,12 @@ export const createAuthSlice: StateCreator<
             }
         }
     },
-    register: async (email: string, password: string) => {
+    register: async (email: string, password: string, name: string) => {
         try {
             const requestData = {
                 email,
-                password
+                password,
+                name
             }
 
             const response = await postRequestWithoutToken<{ token: string }>('auth/register', requestData)
