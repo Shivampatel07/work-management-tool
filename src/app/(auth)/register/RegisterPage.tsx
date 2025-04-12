@@ -8,6 +8,7 @@ import { FieldValues, useForm } from 'react-hook-form';
 import { useStore } from '@/hooks/useStore';
 import { useRouter } from 'next/navigation';
 import Loader from '@/components/common/Loader';
+import { motion } from "motion/react"
 
 const RegisterPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -43,7 +44,10 @@ const RegisterPage = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-secondary dark:bg-secondary">
-      <div className="w-full md:m-0 m-5 max-w-md md:px-8 px-4 py-6 rounded-lg bg-ternary dark:bg-ternary shadow-lg text-text1 dark:text-text1 border border-border-color1 dark:border-border-color1" >
+      <motion.div
+         initial={{ opacity: 0, scale: 0.8 }}
+         animate={{ opacity: 1, scale: 1 }}
+        className="w-full md:m-0 m-5 max-w-md md:px-8 px-4 py-6 rounded-lg bg-ternary dark:bg-ternary shadow-lg text-text1 dark:text-text1 border border-border-color1 dark:border-border-color1" >
         {/* Logo/Brand Area */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold">
@@ -150,7 +154,7 @@ const RegisterPage = () => {
             </p>
           </div>
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 };
