@@ -42,12 +42,11 @@ export default function CommonAllComponents({ children }: Readonly<{ children: R
                 <ServerSideBar hideSideBar={!showSideBar} />
             )}
                 <motion.div
-                    initial={{ x: '-75px' }} // Initial state (hidden off-screen)
+                    initial={{ x: '-75.22px' }} // Initial state (hidden off-screen)
                     animate={{
-                      x: !showSideBar ? '-75px' : '0%', // Slide in or out based on hideSideBar
+                      x: !showSideBar ? '-75.22px' : '0%', // Slide in or out based on hideSideBar
                     }}
-                    exit={{ x: '-75px' }} // Exit state (hidden off-screen)
-                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                    exit={{ x: '-75.22px' }} // Exit state (hidden off-screen)
                     className={`${showSideBar ? 'w-[calc(100vw-75px)]' : 'w-full'} h-full`}>{children}</motion.div>
             </div>
         </div>
