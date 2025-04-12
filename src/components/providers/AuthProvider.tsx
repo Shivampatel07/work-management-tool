@@ -26,19 +26,21 @@ export default function AuthProvider({ children }: Readonly<{ children: React.Re
                     router.push('/login')
                     return
                 }
+                else if (authenticatedOrNot && publicPath.includes(path)) {
+                    router.push('/')
+                    return
+                }
+                else {
+                    setIsLoading(false)
+                }
             } catch (error) {
                 console.error(error)
+                setIsLoading(false)
             }
         }
 
-        checkAuth().finally(() => { 
-            setIsLoading(false)
-        }) 
+        checkAuth()
     }, [fetchProfile, isAuthenticated, path, router])
 
-    if (isLoading) {
-        return <MainPageLoader />
-    }
-
-    return children
+    return isLoading ? <MainPageLoader /> : <>{children}</>
 }
